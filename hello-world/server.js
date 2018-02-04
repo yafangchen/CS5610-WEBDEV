@@ -9,13 +9,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-
-
 // Point static path to dist -- For building -- REMOVE
-app.use(express.static(path.join(__dirname, 'dist')));
-
-
+app.use(express.static(path.join(__dirname, 'src/assets')));
 
 // CORS
 app.use(function(req, res, next) {
@@ -24,9 +19,6 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
 });
-
-
-
 
 const port = process.env.PORT || '3100';
 app.set('port', port);
@@ -39,11 +31,10 @@ const server = http.createServer(app);
 //serverSide(app);
 
 
-
 // For Build: Catch all other routes and return the index file -- BUILDING
-app.get('*', function (req, res) {
+/*app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
+}); */
 
 
 server.listen( port , () => console.log('Running on port 3100'));
