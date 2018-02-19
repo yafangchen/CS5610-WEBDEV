@@ -32,8 +32,10 @@ export class WidgetHeaderComponent implements OnInit {
     );
 
     this.widget = this.widgetService.findWidgetById(this.widgetId);
-    this.headerText = this.widget.text;
-    this.headerSize = this.widget.size;
+    if (this.widget != null) {
+      this.headerText = this.widget.text;
+      this.headerSize = this.widget.size;
+    }
   }
 
   editWidget() {
@@ -42,16 +44,17 @@ export class WidgetHeaderComponent implements OnInit {
     if (this.widget == null) {
       const new_widget = {
         _id: (new Date()).getTime() + '',
-        widgetType: 'Header',
+        widgetType: 'HEADER',
         pageId: this.pageId,
         size: this.headerSize,
         text: this.headerText
       };
+      console.log(new_widget);
       this.widgetService.createWidget(this.pageId, new_widget);
     } else {
       const new_widget = {
         _id: this.widgetId,
-        widgetType: 'Header',
+        widgetType: 'HEADER',
         pageId: this.pageId,
         size: this.headerSize,
         text: this.headerText

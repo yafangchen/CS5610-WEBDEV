@@ -2,13 +2,13 @@
   <div class="container-fluid row">
 
     <div class="navbar-text pull-left">
-      <a routerLink="user/{{userId}}/website/{{websiteId}}/page" class="cl-text-black cl-icon-padding">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page" class="cl-text-black cl-icon-padding">
           <span class="glyphicon glyphicon-chevron-left">
           </span>
       </a>
     </div>
     <div class="navbar-text pull-right">
-      <a routerLink="user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new" class="cl-icon-padding cl-text-black">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new" class="cl-icon-padding cl-text-black">
           <span class="glyphicon glyphicon-plus">
           </span>
       </a>
@@ -19,53 +19,48 @@
   </div>
 </nav>
 
-<div class="container cl-container-padding">
-  <div *ngFor="let widget of widgets">
+  <div class="container" *ngFor="let widget of widgets">
 
-    <div [ngSwitch]="widget.type">
+    <div [ngSwitch]="widget.widgetType">
 
-      <div *ngSwitchCase="'Header'">
+      <div *ngSwitchCase="'HEADER'">
         <div class="pull-right">
-          <a href="#" class="pull-right">
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-          </a>
-          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new/header">
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
             <span class="glyphicon glyphicon-cog"></span>
           </a>
+        </div>
 
-
-          <a>{{widget.widgetType}}</a>
-          <a>{{widget.text}}</a>
+      <div class="pull-left">
+          <h3>{{widget.widgetType}}</h3>
+          <p>{{widget.text}}</p>
 
         </div>
       </div>
 
-      <div *ngSwitchCase="'YouTube'">
+      <div *ngSwitchCase="'YOUTUBE'">
         <div class="pull-right">
-          <a href="#" class="pull-right">
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-          </a>
-          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new/youtube">
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
             <span class="glyphicon glyphicon-cog"></span>
           </a>
         </div>
 
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe width="640" height="360" src={{widget.url}} frameborder="0" allowfullscreen></iframe>"
+        <div>
+          <div class="embed-responsive embed-responsive-16by9">
+          <h3>{{widget.widgetType}}</h3>
+          <iframe width="640" height="360" src={{widget.url}}></iframe>
+          </div>
         </div>
       </div>
 
-      <div *ngSwitchCase="'Image'">
+      <div *ngSwitchCase="'IMAGE'">
         <div class="pull-right">
-          <a href="#" class="pull-right">
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-          </a>
-          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new/image">
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
             <span class="glyphicon glyphicon-cog"></span>
           </a>
+        </div>
 
-
-          <a>{{widget.widgetType}}</a>
+        <div class="pull-left">
+          <h3>{{widget.widgetType}}</h3>
           <img class="img-responsive img-rounded cl-widget-images"
                src={{widget.url}}>
 
@@ -75,9 +70,6 @@
     </div>
 
   </div>
-
-
-</div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid row">

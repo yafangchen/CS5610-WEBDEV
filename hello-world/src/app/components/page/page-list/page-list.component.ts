@@ -26,5 +26,6 @@ export class PageListComponent implements OnInit {
     );
 
     this.pages = this.pageService.findPageByWebsiteId2(this.websiteId);
+    console.log(this.pages);
   }
 }

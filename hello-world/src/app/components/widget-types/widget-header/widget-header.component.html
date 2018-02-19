@@ -2,13 +2,13 @@
   <div class="container-fluid row">
 
     <div class="navbar-text pull-left">
-      <a routerLink="user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="cl-text-black cl-icon-padding">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="cl-text-black cl-icon-padding">
           <span class="glyphicon glyphicon-chevron-left">
           </span>
       </a>
     </div>
     <div class="navbar-text pull-right">
-      <a routerLink="user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"
          (click)="editWidget()" class="cl-icon-padding cl-text-black">
           <span class="glyphicon glyphicon-ok">
           </span>
@@ -28,16 +28,14 @@
     </div>
     <div class="form-group">
       <label for="heading-text">Text</label>
-      <input name="headerText" type="text" class="form-control" id="heading-text" placeholder="Text"
-             ngModel #headerText="ngModel">
+      <input [(ngModel)]="headerText" name="headerText" type="text" class="form-control" id="heading-text" placeholder="Text">
     </div>
     <div class="form-group">
       <label for="heading-size">Size</label>
-      <input name="headerSize" type="text" class="form-control" id="heading-size" placeholder="3"
-             ngModel #headerSize="ngModel">
+      <input [(ngModel)]="headerSize" name="headerSize" type="text" class="form-control" id="heading-size" placeholder="3">
     </div>
   </form>
-  <a class="btn btn-danger  btn-block" routerLink="user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"
+  <a class="btn btn-danger  btn-block" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"
     (click)="deleteWidget()">Delete</a>
 </div>
 
@@ -45,7 +43,7 @@
   <div class="container-fluid row">
     <div class="pull-right navbar-text">
 
-      <a routerLink="user/{{userId}}" class="cl-icon-padding">
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
         <span class="glyphicon glyphicon-user"></span>
       </a>
 
