@@ -1,0 +1,46 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page" class="cl-text-black cl-icon-padding">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page"
+         (click)="addPage()" class="cl-icon-padding cl-text-black">
+          <span class="glyphicon glyphicon-ok">
+          </span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold">
+      New Page
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+  <form #f="ngForm">
+    <div class="form-group">
+      <label for="page-name">Name</label>
+      <input name="pagename" type="text" class="form-control" id="page-name" placeholder="Page Name"
+             ngModel required #webname="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="page-title">Title</label>
+      <input name="pagetitle" type="text" class="form-control" id="page-title" placeholder="Page Title"
+             ngModel required #webname="ngModel">
+    </div>
+  </form>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid row">
+    <div class="pull-right navbar-text">
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </div>
+  </div>
+</nav>

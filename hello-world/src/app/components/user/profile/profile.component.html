@@ -1,0 +1,40 @@
+<!--
+<nav class="navbar navbar-fixed-top cl-blue-navbar">
+  <div class="container-fluid">
+    <a class="cl-text-white navbar-brand cl-text-bold">
+      Profile
+    </a>
+  </div>
+</nav>
+-->
+
+<h1>Profile</h1>
+
+<div class="container">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input [(ngModel)]="user.username" type="text" class="form-control" id="username" placeholder="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input [(ngModel)]="user.password" type="password" class="form-control" id="password" placeholder="password">
+    </div>
+    <div class="form-group">
+      <label for="first-name">First Name</label>
+      <input [(ngModel)]="user.firstName" type="text" class="form-control" id="first-name" placeholder="Alice">
+    </div>
+    <div class="form-group">
+      <label for="last-name">Last Name</label>
+      <input [(ngModel)]="user.lastName" type="text" class="form-control" id="last-name" placeholder="Wonderland">
+    </div>
+  <a class="btn btn-info btn-block" (click)="updateUser(user)">Update</a>
+  <a class="btn btn-primary btn-block"
+     routerLink="/user/{{user._id}}/website">Websites</a>
+  <a class="btn btn-danger  btn-block"
+     routerLink="/login" >Logout</a>
+</div>
+
+<!--
+<nav class="navbar navbar-fixed-bottom cl-blue-navbar">
+</nav>
+-->

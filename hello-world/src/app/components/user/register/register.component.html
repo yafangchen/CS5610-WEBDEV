@@ -1,0 +1,29 @@
+<h1> Register </h1>
+
+<form (ngSubmit) = "register()" #f="ngForm">
+  <label>FirstName</label>
+  <input   placeholder="firstname" name="firstname" type="text" class="form-control" ngModel required #firstname="ngModel"/>
+
+  <label>LastName</label>
+  <input   placeholder="lastname" name="lastname" type="text" class="form-control" ngModel required #lastname="ngModel"/>
+
+  <label>Username</label>
+  <input   placeholder="username" name="username" type="text" class="form-control" ngModel required #username="ngModel"/>
+
+  <label>Password</label>
+  <input   placeholder="password" name="password" type="password" class="form-control" ngModel required #password="ngModel"/>
+
+  <label>Verify Password</label>
+  <input   placeholder="password" name="password2" type="password" class="form-control" ngModel required #password2="ngModel"/>
+
+  <span class="help-block" *ngIf="password.valid && password2.valid && !(password === password2)">
+        Please Enter Matching Passwords!
+  </span>
+
+  <button class="btn btn-primary btn-block" type="submit" [disabled]="!f.valid"
+    routerLink="/user/{{user._id}}">Register</button>
+  <button class="btn btn-danger btn-block" routerLink="/login">Cancel</button>
+
+{{f.valid}}
+
+</form>
