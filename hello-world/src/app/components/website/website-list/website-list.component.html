@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-fixed-top cl-blue-navbar">
+<nav class="navbar navbar-default cl-blue-navbar navbar-fixed-top">
   <div class="container-fluid">
     <p class="navbar-text pull-left">
       <a routerLink="/user/{{userId}}" class="navbar-link cl-text-white">
@@ -15,7 +15,7 @@
   </div>
 </nav>
 
-<div class="container" style="margin-top: 200px;">
+<div class="container" style="margin-top: 100px;">
   <ul class="list-group cl-list-group-borderless">
     <li *ngFor = "let website of websites">
       <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
