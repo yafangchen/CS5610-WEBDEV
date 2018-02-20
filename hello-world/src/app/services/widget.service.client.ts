@@ -10,7 +10,7 @@ export  class WidgetService {
     new Widget('234', 'HEADER', '321', '2', 'GIZMODO'),
     new Widget('345', 'IMAGE', '321', '2', 'text', '100%', 'http://lorempixel.com/400/200/'),
     new Widget('456', 'HTML', '321', '2', '<p>blalbla</p>'),
-    new Widget('567', 'YOUTUBE', '321', '2', 'text', '100%', 'https://youtube.com/embed/APexI9Zb6iE'),
+    new Widget('567', 'YOUTUBE', '321', '2', 'text', '100%', 'https://youtube.com/embed/APexI9Zb6iE')
   ];
 
   createWidget(pageId, widget) {
