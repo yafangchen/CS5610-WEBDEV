@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
     if (user) {
       console.log(user._id);
       this.router.navigate(['/user', user._id]);
+    } else {
+      this.errorFlag = true;
     }
   }
 
