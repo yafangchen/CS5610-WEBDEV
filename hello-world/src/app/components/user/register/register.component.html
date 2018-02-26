@@ -25,9 +25,13 @@
   <input   placeholder="password" [(ngModel)]="password" name="password" type="password"
            class="form-control" required/>
 
+  <label>Verify Password</label>
+  <input   placeholder="password" [(ngModel)]="password2" name="password2" type="password"
+           class="form-control" required/>
+
   <button class="btn btn-primary btn-block" type="submit" [disabled]="!f.valid"
     routerLink="/user/{{user._id}}">Register</button>
+  <button class="btn btn-danger btn-block" routerLink="/login">Cancel</button>
 
 </form>
 
-<button class="btn btn-danger btn-block" routerLink="/login">Cancel</button>

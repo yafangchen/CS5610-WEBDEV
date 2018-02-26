@@ -12,13 +12,14 @@ import { UserService } from '../../../services/user.service.client';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  user: User;
   @ViewChild('f') registerForm: NgForm;
   username: String; // see usage as two-way data binding
   password: String;
-  verifypassword: String;
+  password2: String;
   firstname: String;
   lastname: String;
+
+  user: User;
 
   errorFlag: boolean;
   errorMsg = 'Please enter matching passwords!';
@@ -28,13 +29,12 @@ export class RegisterComponent implements OnInit {
   register() {
     this.username = this.registerForm.value.username;
     this.password = this.registerForm.value.password;
-    this.verifypassword = this.registerForm.value.verifypassword;
+    this.password2 = this.registerForm.value.password2;
     this.firstname = this.registerForm.value.firstname;
     this.lastname = this.registerForm.value.lastname;
 
-    if (this.password !== this.verifypassword) {
+    if (this.password !== this.password2) {
       this.errorFlag = true;
-      console.log(this.errorMsg);
     } else {
 
 
