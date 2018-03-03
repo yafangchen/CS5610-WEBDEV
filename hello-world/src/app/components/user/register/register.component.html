@@ -1,7 +1,5 @@
 <h1> Register </h1>
 
-{{f.valid}}
-
 <div *ngIf="errorFlag"
      class="alert alert-danger">
   {{errorMsg}}
@@ -29,8 +27,7 @@
   <input   placeholder="password" [(ngModel)]="password2" name="password2" type="password"
            class="form-control" required/>
 
-  <button class="btn btn-primary btn-block" type="submit" [disabled]="!f.valid"
-    routerLink="/user/{{user._id}}">Register</button>
+  <button class="btn btn-primary btn-block" type="submit" [disabled]="!f.valid">Register</button>
   <button class="btn btn-danger btn-block" routerLink="/login">Cancel</button>
 
 </form>

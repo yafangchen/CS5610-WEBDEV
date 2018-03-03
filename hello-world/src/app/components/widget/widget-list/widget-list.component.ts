@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
 import {Widget} from '../../../models/widget.model.client';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-widget-list',
@@ -14,8 +15,12 @@ export class WidgetListComponent implements OnInit {
   pageId: String;
   widgets: Widget[];
 
-  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
+  constructor(private domSanitizer: DomSanitizer, private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
 
+  getUrl(url: String) {
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(url.toString());
+  }
+  
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params: any) => {

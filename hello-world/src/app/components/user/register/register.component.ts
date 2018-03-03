@@ -46,9 +46,6 @@ export class RegisterComponent implements OnInit {
       lastName: this.lastname
     };
 
-    console.log((new Date()).getTime());
-    console.log(this.user);
-
     this.userService.createUser(this.user);
     this.router.navigate(['/user', this.user._id]);
   }}
