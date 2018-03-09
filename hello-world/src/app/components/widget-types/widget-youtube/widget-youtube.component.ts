@@ -32,12 +32,17 @@ export class WidgetYoutubeComponent implements OnInit {
       }
     );
 
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    if (this.widget != null) {
-      this.youtubeText = this.widget.text;
-      this.youtubeURL = this.widget.url;
-      this.youtubeWidth = this.widget.width;
-    }
+    this.widgetService.findWidgetById(this.widgetId)
+      .subscribe(widget => {
+        console.log(widget);
+        this.widget = widget;
+        if (this.widget != null) {
+          this.youtubeText = this.widget.text;
+          this.youtubeURL = this.widget.url;
+          this.youtubeWidth = this.widget.width;
+          console.log(this.youtubeText);
+        }
+      });
   }
 
   editWidget() {
@@ -53,7 +58,7 @@ export class WidgetYoutubeComponent implements OnInit {
         url: this.youtubeURL,
         width: this.youtubeWidth
       };
-      this.widgetService.createWidget(this.pageId, new_widget);
+      this.widgetService.createWidget(this.pageId, new_widget).subscribe();
     } else {
       const new_widget = {
         _id: this.widgetId,
@@ -63,11 +68,11 @@ export class WidgetYoutubeComponent implements OnInit {
         url: this.youtubeURL,
         width: this.youtubeWidth
       };
-      this.widgetService.updateWidget(this.widgetId, new_widget);
+      this.widgetService.updateWidget(this.widgetId, new_widget).subscribe();
     }
   }
 
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widgetId);
+    this.widgetService.deleteWidget(this.widgetId).subscribe();
   }
 }

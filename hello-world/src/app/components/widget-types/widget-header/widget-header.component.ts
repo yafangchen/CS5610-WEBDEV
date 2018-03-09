@@ -31,11 +31,14 @@ export class WidgetHeaderComponent implements OnInit {
       }
     );
 
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    if (this.widget != null) {
-      this.headerText = this.widget.text;
-      this.headerSize = this.widget.size;
-    }
+    this.widgetService.findWidgetById(this.widgetId)
+      .subscribe(widget => {
+        this.widget = widget;
+        if (this.widget != null) {
+          this.headerText = this.widget.text;
+          this.headerSize = this.widget.size;
+        }
+      });
   }
 
   editWidget() {
@@ -49,8 +52,7 @@ export class WidgetHeaderComponent implements OnInit {
         size: this.headerSize,
         text: this.headerText
       };
-      console.log(new_widget);
-      this.widgetService.createWidget(this.pageId, new_widget);
+      this.widgetService.createWidget(this.pageId, new_widget).subscribe();
     } else {
       const new_widget = {
         _id: this.widgetId,
@@ -59,11 +61,11 @@ export class WidgetHeaderComponent implements OnInit {
         size: this.headerSize,
         text: this.headerText
       };
-      this.widgetService.updateWidget(this.widgetId, new_widget);
+      this.widgetService.updateWidget(this.widgetId, new_widget).subscribe();
     }
   }
 
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widgetId);
+    this.widgetService.deleteWidget(this.widgetId).subscribe();
   }
 }

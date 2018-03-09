@@ -38,7 +38,7 @@ export class PageNewComponent implements OnInit {
       websiteId: this.websiteId,
       title: this.pagetitle
     };
-    this.pageService.createPage(this.websiteId, new_page);
+    this.pageService.createPage(this.websiteId, new_page).subscribe();
   }
 
 }

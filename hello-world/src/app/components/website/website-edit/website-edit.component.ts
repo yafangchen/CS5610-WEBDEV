@@ -28,8 +28,14 @@ export class WebsiteEditComponent implements OnInit {
       }
     );
 
-    this.websites = this.websiteService.findWebsitesByUser2(this.userId);
-    this.website = this.websiteService.findWebsitesById(this.websiteId);
+    this.websiteService.findWebsitesByUser(this.userId)
+      .subscribe((websites: Website[]) => {
+        this.websites = websites;
+      });
+    this.websiteService.findWebsiteById(this.websiteId)
+      .subscribe((website: Website) => {
+        this.website = website;
+      });
     this.webname = this.website.name;
     this.webdescription = this.website.description;
   }
@@ -43,11 +49,11 @@ export class WebsiteEditComponent implements OnInit {
       description: this.webdescription,
       developId: this.userId
     };
-    this.websiteService.updateWebsite(this.websiteId, new_website);
+    this.websiteService.updateWebsite(this.websiteId, new_website).subscribe();
   }
 
   deleteWebsite() {
-    this.websiteService.deleteWebsite(this.websiteId);
+    this.websiteService.deleteWebsite(this.websiteId).subscribe();
   }
 
 }

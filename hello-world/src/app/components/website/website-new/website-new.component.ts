@@ -25,7 +25,10 @@ export class WebsiteNewComponent implements OnInit {
       }
     );
 
-    this.websites = this.websiteService.findWebsitesByUser2(this.userId);
+    this.websiteService.findWebsitesByUser(this.userId)
+      .subscribe((websites: Website[]) => {
+        this.websites = websites;
+      });
   }
 
   addWebsite() {
@@ -37,7 +40,7 @@ export class WebsiteNewComponent implements OnInit {
       description: this.webdescription,
       developId: this.userId
     };
-    this.websiteService.createWebsite(this.userId, new_website);
+    this.websiteService.createWebsite(this.userId, new_website).subscribe();
   }
 
 }

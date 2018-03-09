@@ -20,7 +20,7 @@ export class WidgetListComponent implements OnInit {
   getUrl(url: String) {
     return this.domSanitizer.bypassSecurityTrustResourceUrl(url.toString());
   }
-  
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params: any) => {
@@ -30,8 +30,10 @@ export class WidgetListComponent implements OnInit {
       }
     );
 
-    this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
-    console.log(this.widgets);
+    this.widgetService.findWidgetsByPageId(this.pageId)
+      .subscribe(widgets => {
+        this.widgets = widgets;
+      });
   }
 
 }

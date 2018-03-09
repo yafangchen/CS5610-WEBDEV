@@ -25,7 +25,9 @@ export class PageListComponent implements OnInit {
       }
     );
 
-    this.pages = this.pageService.findPageByWebsiteId2(this.websiteId);
-    console.log(this.pages);
+    this.pageService.findPageByWebsiteId(this.websiteId)
+      .subscribe(pages => {
+        this.pages = pages;
+      });
   }
 }

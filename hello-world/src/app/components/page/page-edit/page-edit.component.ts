@@ -29,7 +29,10 @@ export class PageEditComponent implements OnInit {
       }
     );
 
-    this.page = this.pageService.findPageById(this.pageId);
+    this.pageService.findPageById(this.pageId)
+      .subscribe(page => {
+        this.page = page;
+      });
     this.pagename = this.page.name;
     this.pagetitle = this.page.title;
   }
@@ -43,11 +46,11 @@ export class PageEditComponent implements OnInit {
       websiteId: this.websiteId,
       title: this.pagetitle
     };
-    this.pageService.updatePage(this.pageId, new_page);
+    this.pageService.updatePage(this.pageId, new_page).subscribe();
   }
 
   deletePage() {
-    this.pageService.deletePage(this.pageId);
+    this.pageService.deletePage(this.pageId).subscribe();
   }
 
 }

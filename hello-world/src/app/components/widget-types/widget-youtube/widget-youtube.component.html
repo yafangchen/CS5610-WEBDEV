@@ -28,18 +28,15 @@
     </div>
     <div class="form-group">
       <label for="youtube-text">Text</label>
-      <input name="youtubeText" type="text" class="form-control" id="youtube-text" placeholder="Text"
-             ngModel #youtubeText="ngModel">
+      <input [(ngModel)]="youtubeText" name="youtubeText" type="text" class="form-control" id="youtube-text" placeholder="Text">
     </div>
     <div class="form-group">
       <label for="youtube-URL">URL</label>
-      <input name="youtubeURL" type="text" class="form-control" id="youtube-URL" placeholder="URL"
-             ngModel #youtubeURL="ngModel">
+      <input [(ngModel)]="youtubeURL" name="youtubeURL" type="text" class="form-control" id="youtube-URL" placeholder="URL">
     </div>
     <div class="form-group">
       <label for="youtube-width">Width</label>
-      <input name="youtubeWidth" type="text" class="form-control" id="youtube-width" placeholder="100%"
-             ngModel #youtubeWidth="ngModel">
+      <input [(ngModel)]="youtubeWidth" name="youtubeWidth" type="text" class="form-control" id="youtube-width" placeholder="100%">
     </div>
   </form>
   <a class="btn btn-danger btn-block" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"

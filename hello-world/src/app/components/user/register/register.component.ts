@@ -46,8 +46,11 @@ export class RegisterComponent implements OnInit {
       lastName: this.lastname
     };
 
-    this.userService.createUser(this.user);
-    this.router.navigate(['/user', this.user._id]);
+    this.userService.createUser(this.user)
+      .subscribe((user: User) => {
+        console.log(user);
+        this.router.navigate(['/user', this.user._id]);
+    });
   }}
 
   ngOnInit() {

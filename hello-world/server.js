@@ -36,5 +36,9 @@ const server = http.createServer(app);
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 }); */
 
+require("./assignment/app.js")(app);
 
-server.listen( port , () => console.log('Running on port 3100'));
+//server.listen( port , () => console.log('Running on port 3100'));
+
+server.listen( port , function() {
+  console.log('Node app is running on port', app.get('port'))});

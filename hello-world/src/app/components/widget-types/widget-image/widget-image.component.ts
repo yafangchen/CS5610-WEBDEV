@@ -32,12 +32,15 @@ export class WidgetImageComponent implements OnInit {
       }
     );
 
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    if (this.widget != null) {
-      this.imageText = this.widget.text;
-      this.imageURL = this.widget.url;
-      this.imageWidth = this.widget.width;
-    }
+    this.widgetService.findWidgetById(this.widgetId)
+      .subscribe(widget => {
+        this.widget = widget;
+        if (this.widget != null) {
+          this.imageText = this.widget.text;
+          this.imageURL = this.widget.url;
+          this.imageWidth = this.widget.width;
+        }
+      });
   }
 
   editWidget() {
@@ -53,7 +56,7 @@ export class WidgetImageComponent implements OnInit {
         url: this.imageURL,
         width: this.imageWidth
       };
-      this.widgetService.createWidget(this.pageId, new_widget);
+      this.widgetService.createWidget(this.pageId, new_widget).subscribe();
     } else {
       const new_widget = {
         _id: this.widgetId,
@@ -63,11 +66,11 @@ export class WidgetImageComponent implements OnInit {
         url: this.imageURL,
         width: this.imageWidth
       };
-      this.widgetService.updateWidget(this.widgetId, new_widget);
+      this.widgetService.updateWidget(this.widgetId, new_widget).subscribe();
     }
   }
 
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widgetId);
+    this.widgetService.deleteWidget(this.widgetId).subscribe();
   }
 }
