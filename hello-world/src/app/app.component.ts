@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  reorderItems(indexes) {
+    console.log('start: ' + indexes.startIndex);
+    console.log('stop: ' + indexes.endIndex);
+  }
+
 }
+
+

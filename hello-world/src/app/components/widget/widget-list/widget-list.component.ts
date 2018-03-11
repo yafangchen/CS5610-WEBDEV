@@ -21,6 +21,11 @@ export class WidgetListComponent implements OnInit {
     return this.domSanitizer.bypassSecurityTrustResourceUrl(url.toString());
   }
 
+  reorderItems(indexes) {
+    console.log("start: " + indexes.startIndex);
+    console.log("stop: " + indexes.endIndex);
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params: any) => {

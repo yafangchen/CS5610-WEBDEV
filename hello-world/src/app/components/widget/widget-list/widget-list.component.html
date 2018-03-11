@@ -19,9 +19,12 @@
   </div>
 </nav>
 
-  <div class="container" *ngFor="let widget of widgets">
+  <!--- <div class="container" *ngFor="let widget of widgets"> --->
 
-    <div [ngSwitch]="widget.widgetType">
+<ul appWbdvSortable (newIndexes)="reorderItems($event)">
+  <li *ngFor="let widget of widgets" [ngSwitch]="widget.widgetType">
+
+    <!--<div [ngSwitch]="widget.widgetType">-->
 
       <div *ngSwitchCase="'HEADER'">
         <div class="pull-right">
@@ -66,9 +69,10 @@
         </div>
       </div>
 
-    </div>
+    <!--</div>-->
+  </li>
 
-  </div>
+ <!--- </div> --->
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid row">
