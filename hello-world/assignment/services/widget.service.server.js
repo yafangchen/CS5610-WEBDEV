@@ -1,11 +1,15 @@
 module.exports = function (app) {
   var WIDGETS = require("./widget.mock.server");
+  var multer = require('multer');
+  var upload = multer({ dest: __dirname+'/../../dist/assets/uploads' });
 
   app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
   app.post("/api/page/:pageId/widget", createWidget);
   app.get("/api/widget/:widgetId", findWidgetById);
   app.put("/api/widget/:widgetId", updateWidget);
   app.delete("/api/widget/:widgetId", deleteWidget);
+  app.post("/api/upload", upload.single('myFile'), uploadImage);
+
 
   function findAllWidgetsForPage(req, res) {
     var pageId = req.params['pageId'];
@@ -79,6 +83,41 @@ module.exports = function (app) {
       }
     }
     res.status(404).send("widget not found");
+  }
+
+  function uploadImage(req, res) {
+    var userId = req.body.userId;
+    var websiteId = req.body.websiteId;
+    var pageId = req.body.pageId;
+
+    var widgetId      = req.body.widgetId;
+    var width         = req.body.width;
+    var myFile        = req.file;
+
+    var localhost = "http://localhost:3100";
+    var heroku = "";
+
+    if (myFile == null) {
+      res.redirect(localhost + "/user/" + userId + "/website/" + websiteId +
+        "/page/" + pageId + "/widget/" + widgetId)
+    }
+
+    var originalname  = myFile.originalname; // file name on user's computer
+    var filename      = myFile.filename;     // new file name in upload folder
+    var path          = myFile.path;         // full path of uploaded file
+    var destination   = myFile.destination;  // folder where file is saved to
+    var size          = myFile.size;
+    var mimetype      = myFile.mimetype;
+
+    console.log(destination);
+
+    var widget = getWidgetById(widgetId);
+    widget.url = '/assets/uploads/'+filename;
+
+    var callbackUrl   = "/user/" + userId + "/website/" + websiteId +
+      "/page/" + pageId + "/widget/" + widgetId;
+
+    res.redirect(callbackUrl);
   }
 
 }

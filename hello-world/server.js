@@ -40,5 +40,10 @@ require("./assignment/app.js")(app);
 
 //server.listen( port , () => console.log('Running on port 3100'));
 
+app.use('*', function (req, res) {
+  const index = path.join(__dirname, 'dist', 'index.html');
+  res.sendFile(index);
+});
+
 server.listen( port , function() {
   console.log('Node app is running on port', app.get('port'))});

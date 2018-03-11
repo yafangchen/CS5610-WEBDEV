@@ -3,6 +3,7 @@ import {Widget} from '../../../models/widget.model.client';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-widget-image',
@@ -19,16 +20,20 @@ export class WidgetImageComponent implements OnInit {
   imageText: String;
   imageURL: String;
   imageWidth: String;
+  baseUrl: String;
 
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.baseUrl = environment.baseUrl;
+
     this.activatedRoute.params.subscribe(
       (params: any) => {
         this.userId = params['uid'];
         this.websiteId = params['wid'];
         this.pageId = params['pid'];
         this.widgetId = params['wgid'];
+        console.log(this.widgetId);
       }
     );
 
