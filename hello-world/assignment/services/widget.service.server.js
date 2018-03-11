@@ -95,10 +95,10 @@ module.exports = function (app) {
     var myFile        = req.file;
 
     var localhost = "http://localhost:3100";
-    var heroku = "";
+    var heroku = "https://secret-meadow-76604.herokuapp.com";
 
     if (myFile == null) {
-      res.redirect(localhost + "/user/" + userId + "/website/" + websiteId +
+      res.redirect("/user/" + userId + "/website/" + websiteId +
         "/page/" + pageId + "/widget/" + widgetId)
     }
 
