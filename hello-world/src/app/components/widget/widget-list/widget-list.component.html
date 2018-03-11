@@ -19,12 +19,12 @@
   </div>
 </nav>
 
-  <!--- <div class="container" *ngFor="let widget of widgets"> --->
-
-<ul appWbdvSortable (newIndexes)="reorderItems($event)">
+  <!-- <div class="container" *ngFor="let widget of widgets"> -->
+<div class="container" style="margin-top: 100px;">
+ <ul appWbdvSortable (newIndexes)="reorderItems($event)">
   <li *ngFor="let widget of widgets" [ngSwitch]="widget.widgetType">
 
-    <!--<div [ngSwitch]="widget.widgetType">-->
+  <!-- <div [ngSwitch]="widget.widgetType"> -->
 
       <div *ngSwitchCase="'HEADER'">
         <div class="pull-right">
@@ -71,6 +71,8 @@
 
     <!--</div>-->
   </li>
+ </ul>
+</div>
 
  <!--- </div> --->
 

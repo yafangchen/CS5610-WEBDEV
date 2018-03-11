@@ -26,6 +26,8 @@ import { WebsiteService } from './services/website.service.client';
 import { PageService } from './services/page.service.client';
 import { WidgetService } from './services/widget.service.client';
 import { WbdvSortableDirective } from './wbdv-sortable.directive';
+import { WidgetHtmlComponent } from './components/widget-types/widget-html/widget-html.component';
+import { WidgetTextComponent } from './components/widget-types/widget-text/widget-text.component';
 
 
 
@@ -48,7 +50,9 @@ import { WbdvSortableDirective } from './wbdv-sortable.directive';
     WidgetListComponent,
     WidgetChooserComponent,
     WidgetEditComponent,
-    WbdvSortableDirective
+    WbdvSortableDirective,
+    WidgetHtmlComponent,
+    WidgetTextComponent
   ],
   imports: [
     BrowserModule,
