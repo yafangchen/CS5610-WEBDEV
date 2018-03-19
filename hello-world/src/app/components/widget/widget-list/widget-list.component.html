@@ -25,7 +25,7 @@
   <li *ngFor="let widget of widgets" [ngSwitch]="widget.widgetType">
 
   <!-- <div [ngSwitch]="widget.widgetType"> -->
-
+      <h3>{{widget.widgetType}}</h3>
       <div *ngSwitchCase="'HEADER'">
         <div class="pull-right">
           <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
@@ -34,13 +34,32 @@
         </div>
 
       <div class="pull-left">
-          <h3>{{widget.widgetType}}</h3>
           <p>{{widget.text}}</p>
 
         </div>
       </div>
 
-      <div *ngSwitchCase="'YOUTUBE'">
+    <div *ngSwitchCase="'TEXT'">
+      <div class="pull-right">
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+          <span class="glyphicon glyphicon-cog"></span>
+        </a>
+      </div>
+
+      <div *ngIf="widget.formatted">
+        <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+      </div>
+
+      <input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)"
+             placeholder="{{widget.placeholder}}" class="form-control"/>
+
+      <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                class="form-control">{{widget.text}}</textarea>
+    </div>
+
+
+    <div *ngSwitchCase="'YOUTUBE'">
         <div class="pull-right">
           <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
             <span class="glyphicon glyphicon-cog"></span>
@@ -49,8 +68,7 @@
 
         <div>
           <div class="embed-responsive embed-responsive-16by9">
-            <h3>{{widget.widgetType}}</h3>
-          <iframe width="16" height="9" [src]=getUrl(widget.url)></iframe>
+          <iframe width={{widget.width}} height="9" [src]=getUrl(widget.url)></iframe>
           </div>
         </div>
       </div>
@@ -63,11 +81,12 @@
         </div>
 
         <div class="pull-left">
-          <h3>{{widget.widgetType}}</h3>
           <img class="img-responsive img-rounded cl-widget-images" [src]=getUrl(widget.url)>
 
         </div>
       </div>
+
+
 
     <!--</div>-->
   </li>

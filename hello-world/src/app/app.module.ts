@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routing } from './app.routing';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { QuillEditorModule } from 'ngx-quill-editor';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/user/login/login.component';
@@ -58,7 +59,8 @@ import { WidgetTextComponent } from './components/widget-types/widget-text/widge
     BrowserModule,
     Routing,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    QuillEditorModule
   ],
   providers: [UserService, WebsiteService, PageService, WidgetService],
   bootstrap: [AppComponent]

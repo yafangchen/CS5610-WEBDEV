@@ -17,6 +17,8 @@ import { WidgetListComponent } from './components/widget/widget-list/widget-list
 import { WidgetChooserComponent } from './components/widget/widget-chooser/widget-chooser.component';
 import { WidgetEditComponent } from './components/widget/widget-edit/widget-edit.component';
 
+import { WidgetTextComponent } from './components/widget-types/widget-text/widget-text.component';
+
 
 
 const APP_ROUTES: Routes = [
@@ -35,6 +37,7 @@ const APP_ROUTES: Routes = [
   { path : 'user/:uid/website/:wid/page/:pid/widget/new/header' , component: WidgetHeaderComponent},
   { path : 'user/:uid/website/:wid/page/:pid/widget/new/image' , component: WidgetImageComponent},
   { path : 'user/:uid/website/:wid/page/:pid/widget/new/youtube' , component: WidgetYoutubeComponent},
+  { path : 'user/:uid/website/:wid/page/:pid/widget/new/text' , component: WidgetTextComponent},
   { path : 'user/:uid/website/:wid/page/:pid/widget/:wgid' , component: WidgetEditComponent}
 
   // so on
