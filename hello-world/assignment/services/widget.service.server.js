@@ -75,6 +75,8 @@ module.exports = function (app) {
             WIDGETS[i].placeholder = widget.placeholder;
             WIDGETS[i].formatted = widget.formatted;
             break;
+          case 'HTML':
+            WIDGETS[i].text = widget.text;
         }
       }
     }

@@ -39,6 +39,16 @@
         </div>
       </div>
 
+    <div *ngSwitchCase="'HTML'">
+      <div class="pull-right">
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+          <span class="glyphicon glyphicon-cog"></span>
+        </a>
+      </div>
+
+      <div [innerHTML]="widget.text"></div>
+    </div>
+
     <div *ngSwitchCase="'TEXT'">
       <div class="pull-right">
         <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
