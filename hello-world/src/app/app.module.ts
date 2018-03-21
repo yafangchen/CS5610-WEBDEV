@@ -29,6 +29,8 @@ import { WidgetService } from './services/widget.service.client';
 import { WbdvSortableDirective } from './wbdv-sortable.directive';
 import { WidgetHtmlComponent } from './components/widget-types/widget-html/widget-html.component';
 import { WidgetTextComponent } from './components/widget-types/widget-text/widget-text.component';
+import { FlickrImageSearchComponent } from './components/widget-types/widget-image/flickr-image-search/flickr-image-search.component';
+import {FlickrService} from './services/flickr.service.client';
 
 
 
@@ -53,7 +55,8 @@ import { WidgetTextComponent } from './components/widget-types/widget-text/widge
     WidgetEditComponent,
     WbdvSortableDirective,
     WidgetHtmlComponent,
-    WidgetTextComponent
+    WidgetTextComponent,
+    FlickrImageSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,7 @@ import { WidgetTextComponent } from './components/widget-types/widget-text/widge
     HttpClientModule,
     QuillEditorModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
