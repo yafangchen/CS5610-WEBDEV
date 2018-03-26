@@ -26,7 +26,8 @@ function createUser(user){
 function updateUser(userId, user){
   return UserModel.update({_id: userId}, {
     $set: {firstName : user.firstName,
-      lastName : user.lastName}});
+      lastName : user.lastName,
+    email: user.email}});
 }
 
 function findUserByUserName(username){

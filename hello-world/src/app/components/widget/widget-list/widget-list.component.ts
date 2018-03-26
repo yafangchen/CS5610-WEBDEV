@@ -23,7 +23,11 @@ export class WidgetListComponent implements OnInit {
   reorderItems(indexes) {
     this.widgetService.reorderWidgets(this.pageId, indexes.startIndex, indexes.endIndex)
       .subscribe(
-        (data) => console.log(data)
+        (data) => {
+          console.log(data);
+          console.log("start:" + indexes.startIndex);
+          console.log("end:" + indexes.endIndex);
+        }
       );
   }
 

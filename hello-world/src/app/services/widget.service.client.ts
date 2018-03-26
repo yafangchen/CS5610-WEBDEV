@@ -30,7 +30,7 @@ export  class WidgetService {
     return this.httpClient.delete(this.baseUrl + '/api/widget/' + widgetId);
   }
 
-  reorderWidgets(startIndex, endIndex, pageId) {
+  reorderWidgets(pageId, startIndex, endIndex) {
 
     const url = this.baseUrl + '/api/page/' + pageId + '/widget?start=' + startIndex + '&end=' + endIndex;
     return this.httpClient.put(url, '');

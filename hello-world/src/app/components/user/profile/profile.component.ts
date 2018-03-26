@@ -8,7 +8,7 @@ import { UserService } from '../../../services/user.service.client';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user: {_id: '', username: '', password: '', firstName: '', lastName: ''};
+  user: {_id: '', username: '', password: '', firstName: '', lastName: '', email: ''};
 
   constructor(
     private userService: UserService,

@@ -17,11 +17,8 @@ module.exports = function (app) {
     var endIndex = parseInt(req.query.end);
     widgetModel
       .reorderWidgets(pageId, startIndex, endIndex)
-      .then(function (stats) {
-        res.send(200);
-
-      }, function (err) {
-        res.sendStatus(400).send(err);
+      .then(function (status) {
+        res.send(status);
       });
 
   }
@@ -41,7 +38,7 @@ module.exports = function (app) {
     widgetModel.findAllWidgetsForPage(pageId)
       .then(function(widgets){
         var count = widgets.length;
-        newWidget.position = count + 1;
+        newWidget.position = count;
         widgetModel.createWidget(newWidget)
           .then(function(widget){
             res.json(widget);

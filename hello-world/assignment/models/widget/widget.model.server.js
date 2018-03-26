@@ -27,7 +27,7 @@ function updatePosition (pageId, position) {
 }
 
 function reorderWidgets(pageId, startIndex, endIndex) {
-  return WidgetModel.find({_page:pageId}, function (err,widgets) {
+  return WidgetModel.find({pageId:pageId}, function (err,widgets) {
     widgets.forEach (function (widget) {
       if(startIndex < endIndex){
         if(widget.position === startIndex){
@@ -37,7 +37,7 @@ function reorderWidgets(pageId, startIndex, endIndex) {
           && widget.position <= endIndex){
           widget.position --;
           widget.save();
-        }else {
+        }}else {
           if(widget.position === startIndex){
             widget.position = endIndex;
             widget.save();
@@ -47,9 +47,8 @@ function reorderWidgets(pageId, startIndex, endIndex) {
             widget.save();
           }
         }
-      }
+      })
     })
-  })
 }
 
 function updateWidgetUrl(widgetId, newUrl) {
@@ -68,7 +67,7 @@ function createWidget(widget) {
 }
 
 function findAllWidgetsForPage(pageId) {
-  return WidgetModel.find({"pageId": pageId});
+  return WidgetModel.find({"pageId": pageId}).sort({"position":1});
 }
 
 function deleteWidget(widgetId) {
