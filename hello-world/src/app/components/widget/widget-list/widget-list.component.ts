@@ -21,8 +21,10 @@ export class WidgetListComponent implements OnInit {
   }
 
   reorderItems(indexes) {
-    console.log("start: " + indexes.startIndex);
-    console.log("stop: " + indexes.endIndex);
+    this.widgetService.reorderWidgets(this.pageId, indexes.startIndex, indexes.endIndex)
+      .subscribe(
+        (data) => console.log(data)
+      );
   }
 
   ngOnInit() {

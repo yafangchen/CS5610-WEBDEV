@@ -10,8 +10,47 @@ WidgetModel.deleteWidget = deleteWidget;
 WidgetModel.findWidgetById = findWidgetById;
 WidgetModel.updateWidgetById = updateWidgetById;
 WidgetModel.updateWidgetUrl = updateWidgetUrl;
+WidgetModel.reorderWidgets = reorderWidgets;
+WidgetModel.updatePosition = updatePosition;
 
 module.exports = WidgetModel;
+
+function updatePosition (pageId, position) {
+  return WidgetModel.find({_page:pageId}, function (err, widgets) {
+    widgets.forEach (function (widget) {
+      if(widget.position > position){
+        widget.position--;
+        widget.save();
+      }
+    })
+  })
+}
+
+function reorderWidgets(pageId, startIndex, endIndex) {
+  return WidgetModel.find({_page:pageId}, function (err,widgets) {
+    widgets.forEach (function (widget) {
+      if(startIndex < endIndex){
+        if(widget.position === startIndex){
+          widget.position = endIndex;
+          widget.save();
+        }else if (widget.position > startIndex
+          && widget.position <= endIndex){
+          widget.position --;
+          widget.save();
+        }else {
+          if(widget.position === startIndex){
+            widget.position = endIndex;
+            widget.save();
+          } else if(widget.position < startIndex
+            && widget.position >= endIndex){
+            widget.position ++;
+            widget.save();
+          }
+        }
+      }
+    })
+  })
+}
 
 function updateWidgetUrl(widgetId, newUrl) {
   return WidgetModel.update({_id: widgetId}, {$set: {url: newUrl}});
@@ -61,6 +100,7 @@ function updateWidgetById(widgetId, newWidget) {
       newWidget._id = widgetId;
       newWidget.widgetType = widget.widgetType;
       newWidget.pageId = widget.pageId;
+      newWidget.position = widget.position;
       return WidgetModel.update({_id: widgetId}, newWidget);
     })
 }

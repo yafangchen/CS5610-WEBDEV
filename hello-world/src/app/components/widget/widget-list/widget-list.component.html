@@ -76,7 +76,7 @@
     </div>
 
 
-    <div *ngSwitchCase="'YOUTUBE'">
+    <div *ngSwitchCase="'YOUTUBE'" class="youtube-widget">
         <div class="pull-right">
           <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
             <span class="glyphicon glyphicon-cog"></span>
@@ -85,7 +85,7 @@
 
         <div>
           <div class="embed-responsive embed-responsive-16by9">
-          <iframe width={{widget.width}} height="9" [src]=getUrl(widget.url)></iframe>
+          <iframe width="560" height="315" [src]=getUrl(widget.url) frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
       </div>
