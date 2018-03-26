@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Widget} from '../../../models/widget.model.client';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
@@ -16,7 +15,7 @@ export class WidgetImageComponent implements OnInit {
   websiteId: String;
   pageId: String;
   widgetId: String;
-  widget: Widget;
+  widget: {widgetType: '', pageId: '', text: '', url: '', width: ''};
   imageText: String;
   imageURL: String;
   imageWidth: String;
@@ -33,12 +32,11 @@ export class WidgetImageComponent implements OnInit {
         this.websiteId = params['wid'];
         this.pageId = params['pid'];
         this.widgetId = params['wgid'];
-        console.log(this.widgetId);
       }
     );
 
     this.widgetService.findWidgetById(this.widgetId)
-      .subscribe(widget => {
+      .subscribe((widget: any) => {
         this.widget = widget;
         if (this.widget != null) {
           this.imageText = this.widget.text;
@@ -54,7 +52,6 @@ export class WidgetImageComponent implements OnInit {
     this.imageWidth = this.widgetEditForm.value.imageWidth;
     if (this.widget == null) {
       const new_widget = {
-        _id: (new Date()).getTime() + '',
         widgetType: 'IMAGE',
         pageId: this.pageId,
         text: this.imageText,
@@ -64,7 +61,6 @@ export class WidgetImageComponent implements OnInit {
       this.widgetService.createWidget(this.pageId, new_widget).subscribe();
     } else {
       const new_widget = {
-        _id: this.widgetId,
         widgetType: 'IMAGE',
         pageId: this.pageId,
         text: this.imageText,

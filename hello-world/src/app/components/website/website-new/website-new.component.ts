@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { WebsiteService } from '../../../services/website.service.client';
 import { ActivatedRoute } from '@angular/router';
-import { Website } from '../../../models/website.model.client';
 import {NgForm} from '@angular/forms';
 
 @Component({
@@ -12,7 +11,7 @@ import {NgForm} from '@angular/forms';
 export class WebsiteNewComponent implements OnInit {
   @ViewChild('f') websiteNewForm: NgForm;
   userId: String;
-  websites: Website[] = [];
+  websites: {};
   webname: String;
   webdescription: String;
 
@@ -26,7 +25,7 @@ export class WebsiteNewComponent implements OnInit {
     );
 
     this.websiteService.findWebsitesByUser(this.userId)
-      .subscribe((websites: Website[]) => {
+      .subscribe((websites: any) => {
         this.websites = websites;
       });
   }
@@ -35,7 +34,6 @@ export class WebsiteNewComponent implements OnInit {
     this.webname = this.websiteNewForm.value.webname;
     this.webdescription = this.websiteNewForm.value.webdescription;
     const new_website = {
-      _id: (new Date()).getTime() + '',
       name: this.webname,
       description: this.webdescription,
       developId: this.userId

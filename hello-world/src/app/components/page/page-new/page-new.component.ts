@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {PageService} from '../../../services/page.service.client';
-import {Page} from '../../../models/page.model.client';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -33,7 +32,6 @@ export class PageNewComponent implements OnInit {
     this.pagename = this.pageNewForm.value.pagename;
     this.pagetitle = this.pageNewForm.value.pagetitle;
     const new_page = {
-      _id: (new Date()).getTime() + '',
       name: this.pagename,
       websiteId: this.websiteId,
       title: this.pagetitle

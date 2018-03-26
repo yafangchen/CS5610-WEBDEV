@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Widget} from '../../../models/widget.model.client';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
 
@@ -17,7 +16,7 @@ export class WidgetTextComponent implements OnInit {
   websiteId: String;
   pageId: String;
   widgetId: String;
-  widget: Widget;
+  widget: {widgetType: '', pageId: '', text: '', rows: 0, placeholder: '', formatted: false};
   textText: String;
   textRows: number;
   textPlaceholder: String;
@@ -36,7 +35,7 @@ export class WidgetTextComponent implements OnInit {
     );
 
     this.widgetService.findWidgetById(this.widgetId)
-      .subscribe(widget => {
+      .subscribe((widget: any) => {
         this.widget = widget;
         if (this.widget != null) {
           this.textText = this.widget.text;
@@ -55,7 +54,6 @@ export class WidgetTextComponent implements OnInit {
     console.log(this.textFormatted);
     if (this.widget == null) {
       const new_widget = {
-        _id: (new Date()).getTime() + '',
         widgetType: 'TEXT',
         pageId: this.pageId,
         text: this.textText,
@@ -66,7 +64,6 @@ export class WidgetTextComponent implements OnInit {
       this.widgetService.createWidget(this.pageId, new_widget).subscribe();
     } else {
       const new_widget = {
-        _id: this.widgetId,
         widgetType: 'TEXT',
         pageId: this.pageId,
         text: this.textText,

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../services/user.service.client';
-import { User } from '../../../models/user.model.client';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +8,8 @@ import { User } from '../../../models/user.model.client';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user: User;
+  user: {_id: '', username: '', password: '', firstName: '', lastName: ''};
+
   constructor(
     private userService: UserService,
     private route: ActivatedRoute) { }
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
     this.route.params.subscribe(params => {
       // alert('userId is' + this.userId);
       this.userService.findUserById(params['uid'])
-        .subscribe(user => {
+        .subscribe((user: any) => {
           this.user = user;
         });
     });

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service.client';
-import { User } from '../../../models/user.model.client';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 
@@ -35,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.password = this.loginForm.value.password;
 
     this.userService.findUserByCredentials(this.username, this.password)
-      .subscribe((user: User) => {
+      .subscribe((user: any) => {
         if (user) {
           this.errorFlag = false;
           this.router.navigate(['/user', user._id]);

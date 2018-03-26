@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Widget} from '../../../models/widget.model.client';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
 
@@ -16,7 +15,7 @@ export class WidgetHtmlComponent implements OnInit {
   websiteId: String;
   pageId: String;
   widgetId: String;
-  widget: Widget;
+  widget: {widgetType: '', pageId: '', text: ''};
   htmlText: String;
 
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
@@ -32,7 +31,7 @@ export class WidgetHtmlComponent implements OnInit {
     );
 
     this.widgetService.findWidgetById(this.widgetId)
-      .subscribe(widget => {
+      .subscribe((widget: any) => {
         this.widget = widget;
         if (this.widget != null) {
           this.htmlText = this.widget.text;
@@ -44,7 +43,6 @@ export class WidgetHtmlComponent implements OnInit {
     this.htmlText = this.widgetEditForm.value.htmlText;
     if (this.widget == null) {
       const new_widget = {
-        _id: (new Date()).getTime() + '',
         widgetType: 'HTML',
         pageId: this.pageId,
         text: this.htmlText
@@ -52,7 +50,6 @@ export class WidgetHtmlComponent implements OnInit {
       this.widgetService.createWidget(this.pageId, new_widget).subscribe();
     } else {
       const new_widget = {
-        _id: this.widgetId,
         widgetType: 'HTML',
         pageId: this.pageId,
         text: this.htmlText

@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {PageService} from '../../../services/page.service.client';
-import {Page} from '../../../models/page.model.client';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -14,7 +13,7 @@ export class PageEditComponent implements OnInit {
   userId: String;
   websiteId: String;
   pageId: String;
-  page: Page;
+  page = {name: '', title: ''};
   pagename: String;
   pagetitle: String;
 
@@ -30,7 +29,7 @@ export class PageEditComponent implements OnInit {
     );
 
     this.pageService.findPageById(this.pageId)
-      .subscribe(page => {
+      .subscribe((page: any) => {
         this.page = page;
       });
     this.pagename = this.page.name;
@@ -41,7 +40,6 @@ export class PageEditComponent implements OnInit {
     this.pagename = this.pageEditForm.value.pagename;
     this.pagetitle = this.pageEditForm.value.pagetitle;
     const new_page = {
-      _id: this.pageId,
       name: this.pagename,
       websiteId: this.websiteId,
       title: this.pagetitle

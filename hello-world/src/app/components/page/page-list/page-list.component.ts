@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageService } from '../../../services/page.service.client';
 import { ActivatedRoute } from '@angular/router';
-import { Page } from '../../../models/page.model.client';
 import {WebsiteService} from '../../../services/website.service.client';
-import {Website} from '../../../models/website.model.client';
 
 @Component({
   selector: 'app-page-list',
@@ -13,7 +11,7 @@ import {Website} from '../../../models/website.model.client';
 export class PageListComponent implements OnInit {
   userId: String;
   websiteId: String;
-  pages: Page[] = [];
+  pages: {};
 
   constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) { }
 

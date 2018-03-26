@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Widget} from '../../../models/widget.model.client';
 import {NgForm} from '@angular/forms';
 import {WidgetService} from '../../../services/widget.service.client';
 import {ActivatedRoute} from '@angular/router';
@@ -15,7 +14,7 @@ export class WidgetHeaderComponent implements OnInit {
   websiteId: String;
   pageId: String;
   widgetId: String;
-  widget: Widget;
+  widget: {_id: '', widgetType: '', pageId: '', text: '', size: ''};
   headerText: String;
   headerSize: String;
 
@@ -31,14 +30,16 @@ export class WidgetHeaderComponent implements OnInit {
       }
     );
 
-    this.widgetService.findWidgetById(this.widgetId)
-      .subscribe(widget => {
-        this.widget = widget;
-        if (this.widget != null) {
-          this.headerText = this.widget.text;
-          this.headerSize = this.widget.size;
-        }
-      });
+    if (this.widgetId != null) {
+      this.widgetService.findWidgetById(this.widgetId)
+        .subscribe((widget: any) => {
+          this.widget = widget;
+          if (this.widget != null) {
+            this.headerText = this.widget.text;
+            this.headerSize = this.widget.size;
+          }
+        });
+    }
   }
 
   editWidget() {
@@ -46,7 +47,6 @@ export class WidgetHeaderComponent implements OnInit {
     this.headerSize = this.widgetEditForm.value.headerSize;
     if (this.widget == null) {
       const new_widget = {
-        _id: (new Date()).getTime() + '',
         widgetType: 'HEADER',
         pageId: this.pageId,
         size: this.headerSize,
@@ -55,7 +55,6 @@ export class WidgetHeaderComponent implements OnInit {
       this.widgetService.createWidget(this.pageId, new_widget).subscribe();
     } else {
       const new_widget = {
-        _id: this.widgetId,
         widgetType: 'HEADER',
         pageId: this.pageId,
         size: this.headerSize,

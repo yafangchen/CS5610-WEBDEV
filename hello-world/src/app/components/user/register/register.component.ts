@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
-import { User } from '../../../models/user.model.client';
 
 import { UserService } from '../../../services/user.service.client';
 
@@ -18,8 +17,6 @@ export class RegisterComponent implements OnInit {
   password2: String;
   firstname: String;
   lastname: String;
-
-  user: User;
 
   errorFlag: boolean;
   errorMsg = 'Please enter matching passwords!';
@@ -38,18 +35,20 @@ export class RegisterComponent implements OnInit {
     } else {
 
 
-    this.user = {
-      _id: (new Date()).getTime() + '',
+    const newUser = {
       username: this.username,
       password: this.password,
       firstName: this.firstname,
       lastName: this.lastname
     };
 
-    this.userService.createUser(this.user)
-      .subscribe((user: User) => {
-        console.log(user);
-        this.router.navigate(['/user', this.user._id]);
+    this.userService.createUser(newUser)
+      .subscribe((user: any) => {
+        this.userService.findUserByCredentials(user.username, user.password)
+          .subscribe((responseUser: any) => {
+            const _id = responseUser._id;
+            this.router.navigate(['/user', _id]);
+          });
     });
   }}
 

@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Website} from '../../../models/website.model.client';
 import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute} from '@angular/router';
 
@@ -13,8 +12,14 @@ export class WebsiteEditComponent implements OnInit {
   @ViewChild('f') websiteEditForm: NgForm;
   userId: String;
   websiteId: String;
-  websites: Website[] = [];
-  website: Website;
+  websites: [{}];
+  website = {
+    name: '',
+    description : '',
+    developerId: {},
+    dateCreated: {},
+    pages: [],
+    __v: 0};
   webname: String;
   webdescription: String;
 
@@ -29,11 +34,11 @@ export class WebsiteEditComponent implements OnInit {
     );
 
     this.websiteService.findWebsitesByUser(this.userId)
-      .subscribe((websites: Website[]) => {
+      .subscribe((websites: any) => {
         this.websites = websites;
       });
     this.websiteService.findWebsiteById(this.websiteId)
-      .subscribe((website: Website) => {
+      .subscribe((website: any) => {
         this.website = website;
       });
     this.webname = this.website.name;
@@ -44,7 +49,6 @@ export class WebsiteEditComponent implements OnInit {
     this.webname = this.websiteEditForm.value.webname;
     this.webdescription = this.websiteEditForm.value.webdescription;
     const new_website = {
-      _id: this.websiteId,
       name: this.webname,
       description: this.webdescription,
       developId: this.userId

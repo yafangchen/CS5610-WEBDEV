@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
-import {Widget} from '../../../models/widget.model.client';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
@@ -13,7 +12,7 @@ export class WidgetListComponent implements OnInit {
   userId: String;
   websiteId: String;
   pageId: String;
-  widgets: Widget[];
+  widgets: {};
 
   constructor(private domSanitizer: DomSanitizer, private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
 

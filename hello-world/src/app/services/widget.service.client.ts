@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import { Widget } from '../models/widget.model.client';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
@@ -11,23 +10,23 @@ export  class WidgetService {
   baseUrl = environment.baseUrl;
 
   createWidget(pageId, widget) {
-    return this.httpClient.post<Widget>(this.baseUrl + '/api/page/' + pageId + '/widget', widget);
+    return this.httpClient.post(this.baseUrl + '/api/page/' + pageId + '/widget', widget);
   }
 
   findWidgetsByPageId(pageId: String) {
     console.log(pageId);
-    return this.httpClient.get<Widget[]>(this.baseUrl + '/api/page/' + pageId + '/widget');
+    return this.httpClient.get(this.baseUrl + '/api/page/' + pageId + '/widget');
   }
 
   findWidgetById(widgetId: String) {
-    return this.httpClient.get<Widget>(this.baseUrl + '/api/widget/' + widgetId);
+    return this.httpClient.get(this.baseUrl + '/api/widget/' + widgetId);
   }
 
   updateWidget(widgetId, widget) {
-    return this.httpClient.put<Widget>(this.baseUrl + '/api/widget/' + widgetId, widget);
+    return this.httpClient.put(this.baseUrl + '/api/widget/' + widgetId, widget);
   }
 
   deleteWidget(widgetId: String) {
-    return this.httpClient.delete<Widget>(this.baseUrl + '/api/widget/' + widgetId);
+    return this.httpClient.delete(this.baseUrl + '/api/widget/' + widgetId);
   }
 }

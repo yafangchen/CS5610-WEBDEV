@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Widget} from '../../../models/widget.model.client';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
@@ -15,7 +14,7 @@ export class WidgetYoutubeComponent implements OnInit {
   websiteId: String;
   pageId: String;
   widgetId: String;
-  widget: Widget;
+  widget: {widgetType: '', pageId: '', text: '', url: '', width: ''};
   youtubeText: String;
   youtubeURL: String;
   youtubeWidth: String;
@@ -33,14 +32,12 @@ export class WidgetYoutubeComponent implements OnInit {
     );
 
     this.widgetService.findWidgetById(this.widgetId)
-      .subscribe(widget => {
-        console.log(widget);
+      .subscribe((widget: any) => {
         this.widget = widget;
         if (this.widget != null) {
           this.youtubeText = this.widget.text;
           this.youtubeURL = this.widget.url;
           this.youtubeWidth = this.widget.width;
-          console.log(this.youtubeText);
         }
       });
   }
@@ -51,7 +48,6 @@ export class WidgetYoutubeComponent implements OnInit {
     this.youtubeWidth = this.widgetEditForm.value.youtubeWidth;
     if (this.widget == null) {
       const new_widget = {
-        _id: (new Date()).getTime() + '',
         widgetType: 'YOUTUBE',
         pageId: this.pageId,
         text: this.youtubeText,
@@ -61,7 +57,6 @@ export class WidgetYoutubeComponent implements OnInit {
       this.widgetService.createWidget(this.pageId, new_widget).subscribe();
     } else {
       const new_widget = {
-        _id: this.widgetId,
         widgetType: 'YOUTUBE',
         pageId: this.pageId,
         text: this.youtubeText,
