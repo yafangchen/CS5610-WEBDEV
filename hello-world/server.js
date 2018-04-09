@@ -6,8 +6,24 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
 
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var passport = require('passport');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+app.use(session({
+  secret: 'this is the secret',
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Point static path to dist -- For building -- REMOVE
 app.use(express.static(path.join(__dirname, 'dist')));

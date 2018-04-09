@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 
 import { UserService } from '../../../services/user.service.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-register',
@@ -19,9 +20,9 @@ export class RegisterComponent implements OnInit {
   lastname: String;
 
   errorFlag: boolean;
-  errorMsg = 'Please enter matching passwords!';
+  error: String;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router, private sharedService: SharedService) {}
 
   register() {
     this.username = this.registerForm.value.username;
@@ -34,23 +35,18 @@ export class RegisterComponent implements OnInit {
       this.errorFlag = true;
     } else {
 
-
-    const newUser = {
-      username: this.username,
-      password: this.password,
-      firstName: this.firstname,
-      lastName: this.lastname
-    };
-
-    this.userService.createUser(newUser)
-      .subscribe((user: any) => {
-        this.userService.findUserByCredentials(user.username, user.password)
-          .subscribe((responseUser: any) => {
-            const _id = responseUser._id;
-            this.router.navigate(['/user', _id]);
-          });
-    });
-  }}
+      this.userService.register(this.username, this.password, this.firstname, this.lastname)
+        .subscribe(
+          (data: any) => {
+            this.sharedService.user = data;
+            this.router.navigate(['/user', data._id]);
+          },
+          (error: any) => {
+            this.error = error._body;
+          }
+        );
+    }
+  }
 
   ngOnInit() {
   }
